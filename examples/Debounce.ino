@@ -39,3 +39,9 @@ void loop() {
   digitalWrite(led2Pin, !ledState);
   lastButtonState = reading;
 }
+
+// convert the switch from Momentary into Alternate.
+//
+// `loop()` reserve the `ledState`, while the switch does not be pressed.
+// Even such a simple `state management` makes 3-indented-if.
+// That suggests us use some state management framework.
