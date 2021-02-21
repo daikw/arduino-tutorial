@@ -1,5 +1,6 @@
 const int buttonPin = 2;
-const int ledPin = 13;
+const int led1Pin = 13;
+const int led2Pin = 12;
 
 int ledState = HIGH;
 int buttonState;
@@ -10,9 +11,11 @@ unsigned long debounceDelay = 50;  // ms
 
 void setup() {
   pinMode(buttonPin, INPUT);
-  pinMode(ledPin, OUTPUT);
+  pinMode(led1Pin, OUTPUT);
+  pinMode(led2Pin, OUTPUT);
 
-  digitalWrite(ledPin, ledState);
+  digitalWrite(led1Pin, ledState);
+  digitalWrite(led2Pin, !ledState);
 }
 
 void loop() {
@@ -32,6 +35,7 @@ void loop() {
     }
   }
 
-  digitalWrite(ledPin, ledState);
+  digitalWrite(led1Pin, ledState);
+  digitalWrite(led2Pin, !ledState);
   lastButtonState = reading;
 }
