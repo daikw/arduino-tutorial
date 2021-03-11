@@ -1,4 +1,7 @@
-bool numbers[10][8] = {
+const int leds[8] = {2, 3, 4, 5, 6, 7, 8, 9};
+const int seg = 8;  // number of the led segment
+
+const bool numbers[10][8] = {
     {1, 0, 1, 1, 1, 1, 0, 1},  // 0
     {0, 0, 0, 0, 0, 1, 0, 1},  // 1
     {0, 1, 1, 1, 1, 1, 0, 0},  // 2
@@ -12,20 +15,20 @@ bool numbers[10][8] = {
 };
 
 void setup() {
-  for (int led = 2; led <= 9; led++) {
-    pinMode(led, OUTPUT);
+  for (int i = 0; i < seg; i++) {
+    pinMode(leds[i], OUTPUT);
   }
 }
 
 void clear() {
-  for (int led = 2; led <= 9; led++) {
-    digitalWrite(led, LOW);
+  for (int i = 0; i < seg; i++) {
+    digitalWrite(leds[i], LOW);
   }
 }
 
 void display(int num) {
-  for (int led = 2; led <= 9; led++) {
-    digitalWrite(led, numbers[num][led - 2]);
+  for (int i = 0; i < seg; i++) {
+    digitalWrite(leds[i], numbers[num][i]);
   }
 }
 
