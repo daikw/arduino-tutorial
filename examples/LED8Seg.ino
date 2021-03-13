@@ -14,6 +14,8 @@ const bool numbers[10][8] = {
     {1, 1, 1, 0, 1, 1, 0, 1},  // 9
 };
 
+const int pi[10] = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3};
+
 void setup() {
   for (int i = 0; i < seg; i++) {
     pinMode(leds[i], OUTPUT);
@@ -34,7 +36,7 @@ void display(int num) {
 
 void loop() {
   for (int num = 0; num < 10; num++) {
-    display(num);
+    display(pi[num]);
     delay(1000);
     clear();
   }
