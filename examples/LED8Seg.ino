@@ -40,4 +40,5 @@ void loop() {
     delay(1000);
     clear();
   }
+  delay(1000);
 }
