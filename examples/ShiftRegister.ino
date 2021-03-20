@@ -16,8 +16,8 @@
 //   - delay-timer
 
 int dsPin = 9;      // (14) DS [SER]: Serial input
-int rclkPin = 11;   // (12) ST_CP [RCLK]:
-int srclkPin = 12;  // (11) SH_CP [SRCLK]:
+int rclkPin = 11;   // (12) ST_CP [RCLK]: Storage Register Clock
+int srclkPin = 12;  // (11) SH_CP [SRCLK]: Shift Register Clock
 
 byte leds = 0b00000000;  // 8 bits
 
