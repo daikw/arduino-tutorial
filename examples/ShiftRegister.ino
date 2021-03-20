@@ -15,9 +15,9 @@
 //   - noise-filter
 //   - delay-timer
 
-int dsPin = 9;      // (14) DS [SER] on 74HC595
-int rclkPin = 11;   // (12) ST_CP [RCLK] on 74HC595
-int srclkPin = 12;  // (11)  SH_CP [SRCLK] on 74HC595
+int dsPin = 9;      // (14) DS [SER]: Serial input
+int rclkPin = 11;   // (12) ST_CP [RCLK]:
+int srclkPin = 12;  // (11) SH_CP [SRCLK]:
 
 byte leds = 0b00000000;  // 8 bits
 
@@ -34,6 +34,7 @@ void loop() {
     // Serial.println(leds);
 
     digitalWrite(rclkPin, LOW);
+    // shiftOut is implemented by arduino core library
     shiftOut(dsPin, srclkPin, LSBFIRST, leds);
     digitalWrite(rclkPin, HIGH);
 
