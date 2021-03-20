@@ -3,6 +3,14 @@
 // see also:
 //   - https://omoroya.com/arduino-lesson20/
 //   - https://synapse.kyoto/glossary/shift_register/page001.html
+//
+// words:
+//   - D-flipflop ... https://synapse.kyoto/glossary/dff/page001.html
+//   - multiplexer
+//   - cascade
+//   - parallel <-> serial converter
+//   - noise-filter
+//   - delay-timer
 
 int dsPin = 9;      // (14) DS [SER] on 74HC595
 int rclkPin = 11;   // (12) ST_CP [RCLK] on 74HC595
