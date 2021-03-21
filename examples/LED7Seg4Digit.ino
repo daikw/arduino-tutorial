@@ -63,9 +63,33 @@ void flush(int digit, int number) {
   clear();
 }
 
+unsigned long time2millis(int hour, int minute) {
+  return (60 * (unsigned long)hour + (unsigned long)minute) * 60 * 1000;
+}
+
+bool millis2time(unsigned long millis, int *hour, int *minute) {
+  *hour = (millis / 1000 / 60 / 60) % 24;
+  *minute = (millis / 1000 / 60) % 60;
+
+  return true;
+}
+
+void displayHHMM(unsigned long offset) {
+  int hour, minute;
+  millis2time(offset, &hour, &minute);
+
+  flush(0, hour / 10);
+  flush(1, hour % 10);
+  flush(2, minute / 10);
+  flush(3, minute % 10);
+}
+
+const unsigned long startTime = time2millis(1, 5);
+unsigned long currentTime;
+
 void loop() {
-  for (int i = 0; i < ARRAY_LENGTH(digitPins); i++) {
-    flush(i, i);
-  }
+  currentTime = startTime + millis();
+  displayHHMM(currentTime);
+
   delay(LOOP_DELAY);
 }
