@@ -23,6 +23,10 @@ byte letters[12] = {
 int DP = 10;
 int Null = 11;
 
+int SETUP_DELAY = 100;  // [ms]
+int FLUSH_DELAY = 1;    // [ms]
+int LOOP_DELAY = 1;     // [ms]
+
 void setup() {
   pinMode(dsPin, OUTPUT);
   pinMode(rclkPin, OUTPUT);
@@ -32,6 +36,8 @@ void setup() {
     pinMode(digitPins[i], OUTPUT);
     digitalWrite(digitPins[i], HIGH);
   }
+  srSend(Null);
+  delay(SETUP_DELAY);
 }
 
 void clear() {
@@ -49,7 +55,7 @@ void srSend(int number) {
 void flush(int digit, int number) {
   digitalWrite(digitPins[digit], LOW);
   srSend(number);
-  delay(1);
+  delay(FLUSH_DELAY);
   srSend(Null);
   clear();
 }
@@ -58,5 +64,5 @@ void loop() {
   for (int i = 0; i < sizeof(digitPins); i++) {
     flush(i, i);
   }
-  delay(1);
+  delay(LOOP_DELAY);
 }
