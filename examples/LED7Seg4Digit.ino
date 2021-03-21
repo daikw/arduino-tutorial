@@ -20,6 +20,8 @@ byte letters[12] = {
     0b10000000,  // D.P.
     0b00000000,  // ''
 };
+int DP = 10;
+int Null = 11;
 
 void setup() {
   pinMode(dsPin, OUTPUT);
@@ -48,12 +50,13 @@ void flush(int digit, int number) {
   digitalWrite(digitPins[digit], LOW);
   srSend(number);
   delay(1);
-  digitalWrite(digitPins[digit], HIGH);
+  srSend(Null);
+  clear();
 }
 
 void loop() {
   for (int i = 0; i < sizeof(digitPins); i++) {
-    flush(i, 1);
+    flush(i, i);
   }
   delay(1);
 }
