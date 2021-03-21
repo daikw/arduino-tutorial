@@ -35,9 +35,9 @@ void setup() {
 
   for (int i = 0; i < sizeof(digitPins); i++) {
     pinMode(digitPins[i], OUTPUT);
-    digitalWrite(digitPins[i], HIGH);
   }
-  srSend(Null);
+  clear();
+
   delay(SETUP_DELAY);
 }
 
@@ -45,6 +45,7 @@ void clear() {
   for (int i = 0; i < sizeof(digitPins); i++) {
     digitalWrite(digitPins[i], HIGH);
   }
+  srSend(Null);
 }
 
 void srSend(int number) {
@@ -57,7 +58,6 @@ void flush(int digit, int number) {
   digitalWrite(digitPins[digit], LOW);
   srSend(number);
   delay(FLUSH_DELAY);
-  srSend(Null);
   clear();
 }
 
