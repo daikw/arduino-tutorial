@@ -1,12 +1,12 @@
 // control 4 digits 7 segmented led by using 74HC595
 
-int dsPin = 2;     // (14) DS [SER]: Serial input
-int rclkPin = 3;   // (12) ST_CP [RCLK]: Storage Register Clock
-int srclkPin = 4;  // (11) SH_CP [SRCLK]: Shift Register Clock
+const int dsPin = 2;     // (14) DS [SER]: Serial input
+const int rclkPin = 3;   // (12) ST_CP [RCLK]: Storage Register Clock
+const int srclkPin = 4;  // (11) SH_CP [SRCLK]: Shift Register Clock
 
-int digitPins[4] = {11, 10, 9, 8};
+const int digitPins[4] = {11, 10, 9, 8};
 
-byte letters[12] = {
+const byte letters[12] = {
     0b00111111,  // 0
     0b00000110,  // 1
     0b01011011,  // 2
@@ -20,12 +20,13 @@ byte letters[12] = {
     0b10000000,  // D.P.
     0b00000000,  // ''
 };
-int DP = 10;
-int Null = 11;
 
-int SETUP_DELAY = 100;  // [ms]
-int FLUSH_DELAY = 1;    // [ms]
-int LOOP_DELAY = 1;     // [ms]
+const int DP = 10;
+const int Null = 11;
+
+const int SETUP_DELAY = 100;   // [ms]
+const int FLUSH_DELAY = 1000;  // [ms]
+const int LOOP_DELAY = 1000;   // [ms]
 
 void setup() {
   pinMode(dsPin, OUTPUT);
