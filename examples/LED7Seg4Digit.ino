@@ -1,5 +1,7 @@
 // control 4 digits 7 segmented led by using 74HC595
 
+#define ARRAY_LENGTH(arr) (sizeof(arr) / sizeof(arr[0]))
+
 const int dsPin = 2;     // (14) DS [SER]: Serial input
 const int rclkPin = 3;   // (12) ST_CP [RCLK]: Storage Register Clock
 const int srclkPin = 4;  // (11) SH_CP [SRCLK]: Shift Register Clock
@@ -42,7 +44,7 @@ void setup() {
 }
 
 void clear() {
-  for (int i = 0; i < sizeof(digitPins); i++) {
+  for (int i = 0; i < ARRAY_LENGTH(digitPins); i++) {
     digitalWrite(digitPins[i], HIGH);
   }
   srSend(Null);
@@ -62,7 +64,7 @@ void flush(int digit, int number) {
 }
 
 void loop() {
-  for (int i = 0; i < sizeof(digitPins); i++) {
+  for (int i = 0; i < ARRAY_LENGTH(digitPins); i++) {
     flush(i, i);
   }
   delay(LOOP_DELAY);
