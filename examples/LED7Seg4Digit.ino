@@ -26,9 +26,9 @@ const byte letters[12] = {
 const int DP = 10;
 const int Null = 11;
 
-const int SETUP_DELAY = 100;   // [ms]
-const int FLUSH_DELAY = 1000;  // [ms]
-const int LOOP_DELAY = 1000;   // [ms]
+const int SETUP_DELAY = 100;  // [ms]
+const int FLUSH_DELAY = 2;    // [ms]
+const int LOOP_DELAY = 2;     // [ms]
 
 void setup() {
   pinMode(dsPin, OUTPUT);
