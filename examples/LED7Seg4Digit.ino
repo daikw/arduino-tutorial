@@ -32,13 +32,21 @@ void setup() {
   }
 }
 
-void flush(int digit, int number) {
-  digitalWrite(digitPins[digit], LOW);
+void clear() {
+  for (int i = 0; i < sizeof(digitPins); i++) {
+    digitalWrite(digitPins[i], HIGH);
+  }
+}
 
+void srSend(int number) {
   digitalWrite(rclkPin, LOW);
   shiftOut(dsPin, srclkPin, LSBFIRST, letters[number]);
   digitalWrite(rclkPin, HIGH);
+}
 
+void flush(int digit, int number) {
+  digitalWrite(digitPins[digit], LOW);
+  srSend(number);
   delay(1);
   digitalWrite(digitPins[digit], HIGH);
 }
