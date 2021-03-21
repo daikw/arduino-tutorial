@@ -6,7 +6,7 @@ int srclkPin = 4;  // (11) SH_CP [SRCLK]: Shift Register Clock
 
 int digitPins[4] = {11, 10, 9, 8};
 
-byte numbers[10] = {
+byte letters[12] = {
     0b00111111,  // 0
     0b00000110,  // 1
     0b01011011,  // 2
@@ -17,6 +17,8 @@ byte numbers[10] = {
     0b00100111,  // 7
     0b01111111,  // 8
     0b01101111,  // 9
+    0b10000000,  // D.P.
+    0b00000000,  // ''
 };
 
 void setup() {
@@ -34,7 +36,7 @@ void flush(int digit, int number) {
   digitalWrite(digitPins[digit], LOW);
 
   digitalWrite(rclkPin, LOW);
-  shiftOut(dsPin, srclkPin, LSBFIRST, numbers[number]);
+  shiftOut(dsPin, srclkPin, LSBFIRST, letters[number]);
   digitalWrite(rclkPin, HIGH);
 
   delay(1);
