@@ -28,3 +28,11 @@
 ### [shiftout](https://www.arduino.cc/reference/en/language/functions/advanced-io/shiftout/)
 
 - SPI library can be higher clocked alternative, but how can I use it?
+
+## 74HC595
+
+8bit shift-register mainly used as Serial-Parallel converter.
+
+- simple description: https://synapse.kyoto/glossary/74hc595/page001.html
+- more complicated project: [itsharryle/LED_CUBE](https://github.com/itsharryle/LED_CUBE)
+- examples: `examples/ShiftRegister.ino`, `examples/LED7Seg4Digit.ino`
