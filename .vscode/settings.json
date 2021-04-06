@@ -1,7 +1,7 @@
 {
-    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google }",
-    "C_Cpp.clang_format_style": "Google",
-    "C_Cpp.intelliSenseEngine": "Tag Parser",
-    "editor.formatOnSave": true,
-    "arduino.defaultBaudRate": 9600,
+  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google }",
+  "C_Cpp.clang_format_style": "Google",
+  "C_Cpp.intelliSenseEngine": "Tag Parser",
+  "editor.formatOnSave": true,
+  "arduino.defaultBaudRate": 9600
 }
