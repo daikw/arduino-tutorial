@@ -13,7 +13,8 @@
 #include <SPI.h>
 
 byte mac[] = {0x90, 0xA2, 0xDA, 0x0F, 0x5D, 0x06};
-IPAddress ip(169, 254, 0, 1);
+// IPAddress ip(169, 254, 0, 1);    // link local address
+IPAddress ip(192, 168, 0, 111);  // local network
 
 EthernetServer server(80);
 
@@ -45,54 +46,53 @@ void setup() {
 
 void loop() {
   EthernetClient client = server.available();  // listen for incoming clients
-
-  if (client) {
-    Serial.println("new client");
-
-    // an http request ends with a blank line
-    boolean currentLineIsBlank = true;
-    while (client.connected()) {
-      if (client.available()) {
-        char c = client.read();
-        Serial.write(c);
-        // if you've gotten to the end of the line (received a newline
-        // character) and the line is blank, the http request has ended,
-        // so you can send a reply
-        if (c == '\n' && currentLineIsBlank) {
-          // send a standard http response header
-          client.println("HTTP/1.1 200 OK");
-          client.println("Content-Type: text/html");
-          client.println("Connection: close");
-          client.println("Refresh: 5");
-          client.println();
-          client.println("<!DOCTYPE HTML>");
-
-          // output the value of each analog input pin
-          client.println("<html>");
-          for (int analogChannel = 0; analogChannel < 6; analogChannel++) {
-            int sensorReading = analogRead(analogChannel);
-            client.print("analog input ");
-            client.print(analogChannel);
-            client.print(" is ");
-            client.print(sensorReading);
-            client.println("<br />");
-          }
-          client.println("</html>");
-
-          break;
-        }
-        if (c == '\n') {
-          // you're starting a new line
-          currentLineIsBlank = true;
-        } else if (c != '\r') {
-          // you've gotten a character on the current line
-          currentLineIsBlank = false;
-        }
-      }
-    }
-
-    delay(1);  // give the web browser time to receive the data
-    client.stop();
-    Serial.println("client disconnected");
+  if (!client) {
+    return;
   }
+
+  Serial.println("there is a new client");
+
+  // an http request ends with a blank line
+  boolean currentLineIsBlank = true;
+  while (client.connected() && client.available()) {
+    char c = client.read();
+    Serial.write(c);
+    // if you've gotten to the end of the line (received a newline
+    // character) and the line is blank, the http request has ended,
+    // so you can send a reply
+    if (c == '\n' && currentLineIsBlank) {
+      // send a standard http response header
+      client.println("HTTP/1.1 200 OK");
+      client.println("Content-Type: text/html");
+      client.println("Connection: close");
+      client.println("Refresh: 5");
+      client.println();
+      client.println("<!DOCTYPE HTML>");
+
+      // output the value of each analog input pin
+      client.println("<html>");
+      for (int analogChannel = 0; analogChannel < 6; analogChannel++) {
+        int sensorReading = analogRead(analogChannel);
+        client.print("analog input ");
+        client.print(analogChannel);
+        client.print(" is ");
+        client.print(sensorReading);
+        client.println("<br />");
+      }
+      client.println("</html>");
+
+      break;
+    }
+    if (c == '\n') {
+      // you're starting a new line
+      currentLineIsBlank = true;
+    } else if (c != '\r') {
+      // you've gotten a character on the current line
+      currentLineIsBlank = false;
+    }
+  }
+
+  delay(1);  // give the web browser time to receive the data
+  client.stop();
+  Serial.println("client disconnected");
 }
