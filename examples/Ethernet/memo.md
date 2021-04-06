@@ -14,3 +14,10 @@ you can find `A0` value changes when you cover the top of PH.
 |            |        |
 |--[1 kohm]--|--[PH]--|
 ```
+
+## noticed
+
+- Does the browser poll? It makes `watch-curl` slow to display the page arduino provides on the browser.
+- Doc says `8 connection supported` but when I connect to it from multiple clients, the response become slow.
+- atmega chip and ethernet controller become warm when accessing the web-server.
+- wakeup time of the server is about ~1 sec.
