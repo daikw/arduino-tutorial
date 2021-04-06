@@ -22,8 +22,8 @@
 
 // Enter a MAC address and IP address for your controller below.
 // The IP address will be dependent on your local network:
-byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
-IPAddress ip(192, 168, 1, 177);
+byte mac[] = {0x90, 0xA2, 0xDA, 0x0F, 0x5D, 0x06};
+IPAddress ip(169, 254, 0, 1);
 
 // Initialize the Ethernet server library
 // with the IP address and port you want to use
@@ -31,14 +31,6 @@ IPAddress ip(192, 168, 1, 177);
 EthernetServer server(80);
 
 void setup() {
-  // You can use Ethernet.init(pin) to configure the CS pin
-  // Ethernet.init(10);  // Most Arduino shields
-  // Ethernet.init(5);   // MKR ETH shield
-  // Ethernet.init(0);   // Teensy 2.0
-  // Ethernet.init(20);  // Teensy++ 2.0
-  // Ethernet.init(15);  // ESP8266 with Adafruit Featherwing Ethernet
-  // Ethernet.init(33);  // ESP32 with Adafruit Featherwing Ethernet
-
   // Open serial communications and wait for port to open:
   Serial.begin(9600);
   while (!Serial) {
@@ -69,10 +61,11 @@ void setup() {
 }
 
 void loop() {
-  // listen for incoming clients
-  EthernetClient client = server.available();
+  EthernetClient client = server.available();  // listen for incoming clients
+
   if (client) {
     Serial.println("new client");
+
     // an http request ends with a blank line
     boolean currentLineIsBlank = true;
     while (client.connected()) {
@@ -86,15 +79,13 @@ void loop() {
           // send a standard http response header
           client.println("HTTP/1.1 200 OK");
           client.println("Content-Type: text/html");
-          client.println(
-              "Connection: close");  // the connection will be closed after
-                                     // completion of the response
-          client.println(
-              "Refresh: 5");  // refresh the page automatically every 5 sec
+          client.println("Connection: close");
+          client.println("Refresh: 5");
           client.println();
           client.println("<!DOCTYPE HTML>");
-          client.println("<html>");
+
           // output the value of each analog input pin
+          client.println("<html>");
           for (int analogChannel = 0; analogChannel < 6; analogChannel++) {
             int sensorReading = analogRead(analogChannel);
             client.print("analog input ");
@@ -104,6 +95,7 @@ void loop() {
             client.println("<br />");
           }
           client.println("</html>");
+
           break;
         }
         if (c == '\n') {
@@ -115,9 +107,8 @@ void loop() {
         }
       }
     }
-    // give the web browser time to receive the data
-    delay(1);
-    // close the connection:
+
+    delay(1);  // give the web browser time to receive the data
     client.stop();
     Serial.println("client disconnected");
   }
